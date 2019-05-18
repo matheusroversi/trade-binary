@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="./plugins/c3-chart/c3.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+        #max {
+            color: blue;
+        }
+        #min {
+            color: red;
+        }
+        #stick {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Max: <span id="max"></span><br>
+        Min: <span id="min"></span><br>
+        Stick: <strong id="stick"></strong>
+    </p>
+    <span class="sparkline"></span>.
+
+    <br><br>
+    <button id="betbutton">Apostar</button>
+
+    <span class="sparkline2"></span>
+
+    <script type="text/javascript" src="https://omnipotent.net/jquery.sparkline/contrib/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="https://omnipotent.net/jquery.sparkline/2.0/jquery.sparkline.js"></script>
+
+
+    <script src='trade.js'></script>
+</body>
+</html>
