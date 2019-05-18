@@ -1,4 +1,4 @@
 # trade-binary
 
-*** Chart Sparkline ***
-!(jQuery Sparkline)[(https://omnipotent.net/jquery.sparkline/]
+**Chart Sparkline**
+[jQuery Sparkline](https://omnipotent.net/jquery.sparkline/)
