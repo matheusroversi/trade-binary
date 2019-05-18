@@ -134,4 +134,19 @@ const onBet = (tick) => {
 		})
 
 
+	if (arrBet.length === 6 ) {
+		if(tick > betTick) {
+			// Perdeu
+			status('Perdeu =(', 'danger')
+		} else {
+			// Ganhou
+			status('Ganhou! =D', 'danger')
+		}
+	}
+
+}
+
+
+const status = (message, color) => {
+
 }

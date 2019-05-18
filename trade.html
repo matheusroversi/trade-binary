@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Binary Trader</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -12,35 +12,50 @@
         .sparkline, .sparkline2 {
             margin: auto;
             height: 100px;
-            widows: 300px;
+            width: 300px;
+        }
+        .navbar {
+            margin-bottom: 15px;
+        }
+        .alert{
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    
+    <nav class="navbar navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Binary Trader</a>
+    </nav>
+
     <div class="container">
 
-        <p>
-            Max: <span id="max" class="badge badge-primary"></span><br>
-            Min: <span id="min" class="badge badge-danger"></span><br>
-            Stick: <span id="stick" class="badge badge-success"></span>
-        </p>
-
-        <div class="row">
-            <span class="sparkline"></span>.
+        <div class="card">
+            <div class="card-body">
+                <span id="max" class="badge badge-pill badge-primary"></span>
+                <span id="min" class="badge badge-pill badge-danger"></span>
+                <span id="stick" class="badge badge-pill badge-success"></span>
+                <div class="sparkline"></div>.
+            </div>
         </div>
+
         <br>
 
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm" style="text-align: center;">
                 <button class="btn btn-primary" id="betbutton">Apostar</button>
             </div>
         </div>
+
         <br>
 
-        <div class="row">
-            <span class="sparkline2"></span>
+        <div class="card">
+            <div class="card-body">
+                <div class="sparkline2"></div>
+            </div>
         </div>
+
+        <br>
+        <div id="alert" class="alert" hidden role="alert"></div>
 
     </div>
 
