@@ -16,7 +16,8 @@ ws.onmessage = function(msg) {
 	tick = data.tick.quote
 
 	addTick(tick)
-	onAposta(tick)
+	onBet(tick)
+
 }
 
 const addTick = tick => {
@@ -38,7 +39,7 @@ const addTick = tick => {
 	console.log(arr.toString())
 	console.log('max: ' + max)
 	console.log('min: ' + min)
-	console.log('aposta: ' + apostaTick)
+	console.log('aposta: ' + betTick)
 
 	generateChart(arr)
 }
@@ -50,7 +51,7 @@ const generateChart = arr => {
 		arr2.unshift(t)
 	})
 	$('.sparkline').sparkline(arr2, { 	
-										width: '200px', 
+										width: '300px', 
 									 	height: '100px', 
 										maxSpotColor: '#3232ff', 
 										minSpotColor: '#ff0000', 
@@ -60,49 +61,77 @@ const generateChart = arr => {
 										fillColor: '#e9f4de'
 										})
 
-	if (aposta) {
-	$('.sparkline2').sparkline(arr2, { 	
-								width: '200px', 
-								height: '100px', 
-								maxSpotColor: '#3232ff', 
-								minSpotColor: '#ff0000', 
-								spotColor: '#6ec96e',
-								lineColor: '#6ec96e',
-								spotRadius: 3,
-								fillColor: 'transparent',
-								normalRangeMax: tick,
-								normalRangeMin: apostaTick
-								})
-
-
-	} else {
-		$('.sparkline2').sparkline()
-	}
 }
 
 
 
 
-let aposta = false
-let apostaTick = ''
-let arrAposta = []
+let bet = false
+let betTick = ''
+let arrBet = []
 
+// Trigger button Bet
 const betButton = document.getElementById('betbutton')
-betButton.addEventListener('click', (e) => {
-	aposta = true;
+betButton.addEventListener('click', (e) => { 
+	bet = true 
+	document.getElementById("betbutton").disabled = true
 })
 
-const apostar = (tick) => {
-	
-	
+
+// Function save number Beted
+const toBet = (tick) => {
+	betTick = tick
+	arrBet = []
+	arrBet.push(tick)
 }
 
-const onAposta = (tick) => {
+// IF Bet
+const onBet = (tick) => {
 
-	if (aposta === true && apostaTick === '') {
-		apostar(data.tick.quote)
+	 if (bet && betTick === '')  {
+		toBet(tick)
+		return false
+	} else if (bet === false || betTick === '') {
+		return false
+	} 
+
+
+	if (arrBet.length <= 5) {
+		// Save Bet
+		arrBet.push(tick)
+	} else {
+		// Clear Bet
+		bet = false
+		betTick = ''
+		document.getElementById("betbutton").disabled = false
+		return false
+	}
+	
+	// Chart Mount
+	if (tick > betTick) {
+		normalRangeMax = tick
+		normalRangeMin = betTick
+		normalRangeColor = '#fce3e3'
+	} else {
+		normalRangeMax = betTick
+		normalRangeMin = tick
+		normalRangeColor = '#e9f4de'
 	}
 
-	apostaTick = tick
+
+	$('.sparkline2').sparkline(arrBet, { 	
+		width: '300px', 
+		height: '100px', 
+		maxSpotColor: '#3232ff', 
+		minSpotColor: '#ff0000', 
+		spotColor: '#6ec96e',
+		lineColor: '#6ec96e',
+		spotRadius: 3,
+		fillColor: 'transparent',
+		normalRangeMax: normalRangeMax,
+		normalRangeMin: normalRangeMin,
+		normalRangeColor: normalRangeColor
+		})
+
 
 }
