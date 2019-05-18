@@ -20,6 +20,12 @@
         .alert{
             text-align: center;
         }
+        body {
+            background-color: rgba(227, 227, 227, 0.20);
+        }
+        .shadow {
+            box-shadow: 0px 1px 5px rgba(0,0,0,0.20);
+        }
     </style>
 </head>
 <body>
@@ -34,7 +40,7 @@
                 <span id="max" class="badge badge-pill badge-primary"></span>
                 <span id="min" class="badge badge-pill badge-danger"></span>
                 <span id="stick" class="badge badge-pill badge-success"></span>
-                <div class="sparkline"></div>.
+                <div class="sparkline"></div>
             </div>
         </div>
 
@@ -55,7 +61,7 @@
         </div>
 
         <br>
-        <div id="alert" class="alert" hidden role="alert"></div>
+        <div id="alert" class="alert shadow" hidden role="alert"></div>
 
     </div>
 

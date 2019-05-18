@@ -74,16 +74,22 @@ let arrBet = []
 const betButton = document.getElementById('betbutton')
 betButton.addEventListener('click', (e) => { 
 	bet = true 
-	document.getElementById("betbutton").disabled = true
+	reset()
 })
 
+const reset = () => {
+	document.getElementById("betbutton").disabled = true
+	$('.sparkline2').sparkline([])
+	alert.setAttribute('hidden','')
+	arrBet = []
+}
 
 // Function save number Beted
 const toBet = (tick) => {
 	betTick = tick
-	arrBet = []
 	arrBet.push(tick)
 }
+
 
 // IF Bet
 const onBet = (tick) => {
@@ -140,13 +146,24 @@ const onBet = (tick) => {
 			status('Perdeu =(', 'danger')
 		} else {
 			// Ganhou
-			status('Ganhou! =D', 'danger')
+			status('Ganhou! =D', 'success')
 		}
 	}
 
 }
 
+const alert = document.getElementById("alert")
 
 const status = (message, color) => {
+
+	colors = ['alert-success', 'alert-danger', 'alert-warning', 'alert-primary']
+	colors.map(value => {
+		alert.classList.remove(value)
+	})
+
+	alert.textContent = message
+	alert.classList.add('alert-' + color)
+
+	if (alert.hasAttribute('hidden')) alert.removeAttribute('hidden')
 
 }
