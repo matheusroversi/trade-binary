@@ -10,17 +10,32 @@ let max = 0
 let min = 999999
 let nTickets = 20
 
+const maxBadge = document.getElementById('max')
+const minBadge = document.getElementById('min')
+const tickBadge = document.getElementById('tick')
+
 
 ws.onmessage = function(msg) {
 	var data = JSON.parse(msg.data)
-	tick = data.tick.quote
+	data.tick.quote
 
-	addTick(tick)
-	onBet(tick)
+	addTick(data.tick.quote) // Save new tick in array
+	onBet(data.tick.quote)   // For function Bet
 
 }
 
-const addTick = tick => {
+const addTick = value => {
+
+	if (value > max) {
+		alterColor(tickBadge,'primary')
+	} else if (value > tick) {
+		alterColor(tickBadge,'info')
+	} else {
+		alterColor(tickBadge, 'danger')
+	}
+
+	tick = value
+
 	if (arr.length >= nTickets) arr.pop()
 	arr.unshift(tick)
 
@@ -31,9 +46,11 @@ const addTick = tick => {
 		if (t < min) min = t
 	})
 
-	$("#max").html(max)
-	$("#min").html(min)
-	$("#stick").html(tick)
+	maxBadge.textContent = max
+	minBadge.textContent = min
+	tickBadge.textContent = tick
+
+	
 
 	console.log('>>>>>>')
 	console.log(arr.toString())
@@ -63,7 +80,13 @@ const generateChart = arr => {
 
 }
 
-
+const alterColor = (element, color) => {
+	colors = ['badge-success', 'badge-danger', 'badge-warning', 'badge-primary']
+	colors.map(value => {
+		element.classList.remove(value)
+	})
+	element.classList.add('badge-' + color)
+}
 
 
 let bet = false
@@ -77,6 +100,7 @@ betButton.addEventListener('click', (e) => {
 	reset()
 })
 
+// Reset fields, charts for a new Bet
 const reset = () => {
 	document.getElementById("betbutton").disabled = true
 	$('.sparkline2').sparkline([])
@@ -153,7 +177,6 @@ const onBet = (tick) => {
 }
 
 const alert = document.getElementById("alert")
-
 const status = (message, color) => {
 
 	colors = ['alert-success', 'alert-danger', 'alert-warning', 'alert-primary']
