@@ -4,6 +4,15 @@ ws.onopen = function (evt) {
 	ws.send(JSON.stringify({ ticks: 'R_100' }))
 }
 
+ws.onmessage = function (msg) {
+	var data = JSON.parse(msg.data)
+	data.tick.quote
+
+	addTick(data.tick.quote) // Save new tick in array
+	onBet(data.tick.quote)   // For function Bet
+	bot()
+}
+
 let tick = ''
 let arr = []
 let arrMove = []
@@ -11,20 +20,12 @@ let max = 0
 let min = 999999
 let mov
 let nTickets = 20
+let maxTemp = 0
+let Hour = ''
 
 const maxBadge = document.getElementById('max')
 const minBadge = document.getElementById('min')
 const tickBadge = document.getElementById('tick')
-
-
-ws.onmessage = function (msg) {
-	var data = JSON.parse(msg.data)
-	data.tick.quote
-
-	addTick(data.tick.quote) // Save new tick in array
-	onBet(data.tick.quote)   // For function Bet
-
-}
 
 const addTick = value => {
 
@@ -55,6 +56,15 @@ const addTick = value => {
 	arr.map(t => {
 		if (t > max) max = t
 		if (t < min) min = t
+
+		d = new Date()
+		if (Hour === '') Hour = d.getHours()
+		if (Hour !== d.getHours()) {
+			maxTemp = 0
+			Hour = d.getHours()
+			console.log('Valor maximo/hora zerado')
+		}
+		if (max > maxTemp) maxTemp = max
 	})
 
 	maxBadge.textContent = max
@@ -69,7 +79,7 @@ const addTick = value => {
 		mov = 'HI'
 	}
 	arrMove.unshift(mov)
-	console.log(arrMove)
+	//console.log(arrMove)
 
 
 	/*console.log('>>>>>>')
@@ -189,9 +199,17 @@ const onBet = (tick) => {
 		if (tick > betTick) {
 			// Perdeu
 			status('Perdeu =(', 'danger')
+			if (scriptCheck.checked) lose = lose + 1
 		} else {
 			// Ganhou
 			status('Ganhou! =D', 'success')
+			if (scriptCheck.checked) win = win + 1
+		}
+
+		// Update Bot Score
+		if (scriptCheck.checked) {
+			elWin.textContent = win
+			elLose.textContent = lose
 		}
 	}
 
@@ -221,4 +239,55 @@ const moviment = () => {
 		}
 	})
 	move.innerHTML = scr
+}
+
+
+
+
+// BOT ====================================================================
+
+let win = 0
+let lose = 0
+const elWin = document.getElementById("win")
+const elLose = document.getElementById("lose")
+
+
+
+const script = document.getElementById("script")
+const scriptCheck = document.getElementById("scriptCheck")
+const bot = () => {
+	if (scriptCheck.checked === false || bet === true) return false
+
+	let scr = script.value
+	let arrScr = scr.split(',')
+
+	let vMove = []
+
+	Object.keys(arrMove).map(i => {
+		if (i < arrScr.length) {
+			vMove.unshift(arrMove[i])
+		}
+	})
+
+	vMove = vMove.toString()
+
+	if (scr.substring(0,3) === 'XHI') {
+		scr = scr.substring(4,scr.length)
+		vMove = vMove.substring(3,vMove.length)
+
+		if (parseInt(max) >= parseInt(maxTemp)) {
+
+			if (vMove === scr) {
+				console.log('>>>>>>>>> Bot Started in Max HI: ' + maxTemp)
+				betButton.click()
+			}
+		}
+		return false
+	}
+
+
+	if (vMove === scr) {
+		console.log('>>>>>>>>> Bot Started')
+		betButton.click()
+	}
 }

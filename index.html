@@ -27,10 +27,12 @@
 
                     <!-- Chart real time-->
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-header">
                             <span id="max" class="badge badge-pill badge-primary"></span>
                             <span id="min" class="badge badge-pill badge-danger"></span>
                             <span id="tick" class="badge badge-pill badge-success"></span>
+                        </div>
+                        <div class="card-body">
                             <div class="sparkline"></div>
                         </div>
                         <div id="move" class="card-footer"></div>
@@ -62,7 +64,43 @@
             </div>
 
 
-    </div>
+            <div class="col-xs">
+
+                <div class="container">
+
+                    <!-- Script-->
+                    <div class="card">
+                        <div class="card-header">
+                            Script
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input id="scriptCheck" type="checkbox"
+                                            aria-label="Checkbox for following text input">
+                                    </div>
+                                </div>
+                                <input id="script" type="text" class="form-control"
+                                    aria-label="Text input with checkbox" value="XHI,HI,DO,DO">
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div class="badge badge-success">
+                                Acertos <span id='win' class="badge badge-light">0</span>
+                            </div>
+                            <div class="badge badge-danger">
+                                Erros <span id='lose' class="badge badge-light">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
 
 </body>
 
