@@ -1,13 +1,15 @@
 var ws = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089')
 
-ws.onopen = function(evt) {
+ws.onopen = function (evt) {
 	ws.send(JSON.stringify({ ticks: 'R_100' }))
 }
 
 let tick = ''
 let arr = []
+let arrMove = []
 let max = 0
 let min = 999999
+let mov
 let nTickets = 20
 
 const maxBadge = document.getElementById('max')
@@ -15,7 +17,7 @@ const minBadge = document.getElementById('min')
 const tickBadge = document.getElementById('tick')
 
 
-ws.onmessage = function(msg) {
+ws.onmessage = function (msg) {
 	var data = JSON.parse(msg.data)
 	data.tick.quote
 
@@ -26,18 +28,27 @@ ws.onmessage = function(msg) {
 
 const addTick = value => {
 
-	if (value > max) {
-		alterColor(tickBadge,'primary')
+	// Alter color Tick
+	if (value >= max) {
+		alterColor(tickBadge, 'primary')
 	} else if (value > tick) {
-		alterColor(tickBadge,'info')
+		alterColor(tickBadge, 'info')
+		mov = 'UP'
 	} else {
 		alterColor(tickBadge, 'danger')
+		mov = 'DO'
 	}
 
 	tick = value
 
-	if (arr.length >= nTickets) arr.pop()
+
+	// Save on array
+	if (arr.length >= nTickets) {
+		arr.pop()
+		arrMove.pop()
+	}
 	arr.unshift(tick)
+
 
 	max = 0
 	min = 999999
@@ -50,15 +61,25 @@ const addTick = value => {
 	minBadge.textContent = min
 	tickBadge.textContent = tick
 
-	
 
-	console.log('>>>>>>')
+	// How Movement Tick Do. ([ HIGH - UP - DOWN - LOW ] = [ HI - UP - DO - LO ])
+	if (value <= min) {
+		mov = 'LO'
+	} else if (tick >= max) {
+		mov = 'HI'
+	}
+	arrMove.unshift(mov)
+	console.log(arrMove)
+
+
+	/*console.log('>>>>>>')
 	console.log(arr.toString())
 	console.log('max: ' + max)
 	console.log('min: ' + min)
-	console.log('aposta: ' + betTick)
+	console.log('aposta: ' + betTick)*/
 
 	generateChart(arr)
+	moviment(arrMove)
 }
 
 const generateChart = arr => {
@@ -67,16 +88,16 @@ const generateChart = arr => {
 	arr.map(t => {
 		arr2.unshift(t)
 	})
-	$('.sparkline').sparkline(arr2, { 	
-										width: '300px', 
-									 	height: '100px', 
-										maxSpotColor: '#3232ff', 
-										minSpotColor: '#ff0000', 
-										spotColor: '#6ec96e',
-										lineColor: '#6ec96e',
-										spotRadius: 3,
-										fillColor: '#e9f4de'
-										})
+	$('.sparkline').sparkline(arr2, {
+		width: '300px',
+		height: '100px',
+		maxSpotColor: '#3232ff',
+		minSpotColor: '#ff0000',
+		spotColor: '#6ec96e',
+		lineColor: '#6ec96e',
+		spotRadius: 3,
+		fillColor: '#e9f4de'
+	})
 
 }
 
@@ -95,8 +116,8 @@ let arrBet = []
 
 // Trigger button Bet
 const betButton = document.getElementById('betbutton')
-betButton.addEventListener('click', (e) => { 
-	bet = true 
+betButton.addEventListener('click', (e) => {
+	bet = true
 	reset()
 })
 
@@ -104,7 +125,7 @@ betButton.addEventListener('click', (e) => {
 const reset = () => {
 	document.getElementById("betbutton").disabled = true
 	$('.sparkline2').sparkline([])
-	alert.setAttribute('hidden','')
+	alert.setAttribute('hidden', '')
 	arrBet = []
 }
 
@@ -118,12 +139,12 @@ const toBet = (tick) => {
 // IF Bet
 const onBet = (tick) => {
 
-	 if (bet && betTick === '')  {
+	if (bet && betTick === '') {
 		toBet(tick)
 		return false
 	} else if (bet === false || betTick === '') {
 		return false
-	} 
+	}
 
 
 	if (arrBet.length <= 5) {
@@ -136,7 +157,7 @@ const onBet = (tick) => {
 		document.getElementById("betbutton").disabled = false
 		return false
 	}
-	
+
 	// Chart Mount
 	if (tick > betTick) {
 		normalRangeMax = tick
@@ -149,11 +170,11 @@ const onBet = (tick) => {
 	}
 
 
-	$('.sparkline2').sparkline(arrBet, { 	
-		width: '300px', 
-		height: '100px', 
-		maxSpotColor: '#3232ff', 
-		minSpotColor: '#ff0000', 
+	$('.sparkline2').sparkline(arrBet, {
+		width: '300px',
+		height: '100px',
+		maxSpotColor: '#3232ff',
+		minSpotColor: '#ff0000',
 		spotColor: '#6ec96e',
 		lineColor: '#6ec96e',
 		spotRadius: 3,
@@ -161,11 +182,11 @@ const onBet = (tick) => {
 		normalRangeMax: normalRangeMax,
 		normalRangeMin: normalRangeMin,
 		normalRangeColor: normalRangeColor
-		})
+	})
 
 
-	if (arrBet.length === 6 ) {
-		if(tick > betTick) {
+	if (arrBet.length === 6) {
+		if (tick > betTick) {
 			// Perdeu
 			status('Perdeu =(', 'danger')
 		} else {
@@ -189,4 +210,15 @@ const status = (message, color) => {
 
 	if (alert.hasAttribute('hidden')) alert.removeAttribute('hidden')
 
+}
+
+const move = document.getElementById("move")
+const moviment = () => {
+	let scr = ''
+	Object.keys(arrMove).map(i => {
+		if (i < 10) {
+			scr =  `<span class="badge badge-info ${arrMove[i]}">${arrMove[i]}</span> ` + scr
+		}
+	})
+	move.innerHTML = scr
 }

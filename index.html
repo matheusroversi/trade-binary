@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Binary Trader</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Binary Trader</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs">
+
+                <div class="container">
+
+                    <!-- Chart real time-->
+                    <div class="card">
+                        <div class="card-body">
+                            <span id="max" class="badge badge-pill badge-primary"></span>
+                            <span id="min" class="badge badge-pill badge-danger"></span>
+                            <span id="tick" class="badge badge-pill badge-success"></span>
+                            <div class="sparkline"></div>
+                        </div>
+                        <div id="move" class="card-footer"></div>
+                    </div>
+
+                    <br>
+
+                    <!-- Button to Bet -->
+                    <div class="row">
+                        <div class="col-sm" style="text-align: center;">
+                            <button class="btn btn-primary" id="betbutton">Apostar</button>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Chart of Bet -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="sparkline2"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Alert result of Bet -->
+                    <div id="alert" class="alert shadow" hidden role="alert"></div>
+
+                </div>
+
+            </div>
+
+
+    </div>
+
+</body>
+
+<footer>
+    <script type="text/javascript"
+        src="https://omnipotent.net/jquery.sparkline/contrib/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="https://omnipotent.net/jquery.sparkline/2.0/jquery.sparkline.js"></script>
+    <script src='trade.js'></script>
+</footer>
+
+</html>
