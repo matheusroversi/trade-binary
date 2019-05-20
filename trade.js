@@ -64,15 +64,15 @@ const addTick = value => {
 		if (Hour !== d.getHours()) {
 			maxTemp = 0
 			Hour = d.getHours()
-			console.log('Valor maximo/hora zerado')
+			console.warn('Valor maximo/hora zerado')
 		}
 		if (max > maxTemp) {
 			maxTemp = max
-			console.log('HI: ' + maxTemp)
+			console.warn('HI: ' + maxTemp)
 		}
 		if (min < minTemp) {
 			minTemp = min
-			console.log('LOW: ' + minTemp)
+			console.warn('LOW: ' + minTemp)
 		}
 	})
 
@@ -153,7 +153,7 @@ const reset = () => {
 const toBet = (tick) => {
 	betTick = tick
 	arrBet.push(tick)
-	console.log('Aposta realizada: ' + tick)
+	console.info('Aposta realizada: ' + tick)
 }
 
 
@@ -211,12 +211,12 @@ const onBet = (tick) => {
 			// Perdeu
 			status('Perdeu =(', 'danger')
 			if (scriptCheck.checked) lose = lose + 1
-			console.log('Você Perdeu')
+			console.info('Você Perdeu')
 		} else {
 			// Ganhou
 			status('Ganhou! =D', 'success')
 			if (scriptCheck.checked) win = win + 1
-			console.log('Você Ganhou')
+			console.info('Você Ganhou')
 		}
 
 		// Update Bot Score
@@ -291,7 +291,7 @@ const bot = () => {
 		if (parseInt(max) >= parseInt(maxTemp)) {
 
 			if (vMove === scr) {
-				console.log('>>>>>>>>> Bot Started in Max HI: ' + maxTemp)
+				console.info('>>>>>>>>> Bot Started in Max HI: ' + maxTemp)
 				betButton.click()
 			}
 		}
@@ -300,7 +300,7 @@ const bot = () => {
 
 
 	if (vMove === scr) {
-		console.log('>>>>>>>>> Bot Started')
+		console.info('>>>>>>>>> Bot Started')
 		betButton.click()
 	}
 }
