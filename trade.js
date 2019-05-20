@@ -21,7 +21,7 @@ let min = 999999
 let mov
 let nTickets = 20
 let maxTemp = 0
-let minTemp = 0
+let minTemp = 999999
 let Hour = ''
 
 const maxTempBadge = document.getElementById('maxTemp')
