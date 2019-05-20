@@ -158,6 +158,8 @@ const toBet = (tick) => {
 
 
 // IF Bet
+const ckUp = document.getElementById('ckUp')
+
 const onBet = (tick) => {
 
 	if (bet && betTick === '') {
@@ -180,7 +182,7 @@ const onBet = (tick) => {
 	}
 
 	// Chart Mount
-	if (tick > betTick) {
+	if (tick > betTick && ckUp.value === false) {
 		normalRangeMax = tick
 		normalRangeMin = betTick
 		normalRangeColor = '#fce3e3'
@@ -207,7 +209,7 @@ const onBet = (tick) => {
 
 
 	if (arrBet.length === 6) {
-		if (tick > betTick) {
+		if (tick > betTick && ckUp.value === false) {
 			// Perdeu
 			status('Perdeu =(', 'danger')
 			if (scriptCheck.checked) lose = lose + 1
