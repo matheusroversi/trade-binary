@@ -21,8 +21,10 @@ let min = 999999
 let mov
 let nTickets = 20
 let maxTemp = 0
+let minTemp = 0
 let Hour = ''
 
+const maxTempBadge = document.getElementById('maxTemp')
 const maxBadge = document.getElementById('max')
 const minBadge = document.getElementById('min')
 const tickBadge = document.getElementById('tick')
@@ -64,12 +66,20 @@ const addTick = value => {
 			Hour = d.getHours()
 			console.log('Valor maximo/hora zerado')
 		}
-		if (max > maxTemp) maxTemp = max
+		if (max > maxTemp) {
+			maxTemp = max
+			console.log('HI: ' + maxTemp)
+		}
+		if (min < minTemp) {
+			minTemp = min
+			console.log('LOW: ' + minTemp)
+		}
 	})
 
 	maxBadge.textContent = max
 	minBadge.textContent = min
 	tickBadge.textContent = tick
+	maxTempBadge.textContent = maxTemp
 
 
 	// How Movement Tick Do. ([ HIGH - UP - DOWN - LOW ] = [ HI - UP - DO - LO ])
@@ -143,6 +153,7 @@ const reset = () => {
 const toBet = (tick) => {
 	betTick = tick
 	arrBet.push(tick)
+	console.log('Aposta realizada: ' + tick)
 }
 
 
@@ -200,10 +211,12 @@ const onBet = (tick) => {
 			// Perdeu
 			status('Perdeu =(', 'danger')
 			if (scriptCheck.checked) lose = lose + 1
+			console.log('Você Perdeu')
 		} else {
 			// Ganhou
 			status('Ganhou! =D', 'success')
 			if (scriptCheck.checked) win = win + 1
+			console.log('Você Ganhou')
 		}
 
 		// Update Bot Score

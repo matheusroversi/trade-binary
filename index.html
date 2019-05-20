@@ -28,9 +28,10 @@
                     <!-- Chart real time-->
                     <div class="card">
                         <div class="card-header">
-                            <span id="max" class="badge badge-pill badge-primary"></span>
-                            <span id="min" class="badge badge-pill badge-danger"></span>
-                            <span id="tick" class="badge badge-pill badge-success"></span>
+                            <span id="maxTemp" class="badge badge-pill badge-primary" title="Valor Máximo da Última Hora"></span>
+                            <span id="max" class="badge badge-pill badge-info" title="Valor Máximo dos Últimos Ticks"></span>
+                            <span id="min" class="badge badge-pill badge-danger" title="Valor Mínimo dos Últimos Ticks"></span>
+                            <span id="tick" class="badge badge-pill badge-success" title="Valor do Tick Atual"></span>
                         </div>
                         <div class="card-body">
                             <div class="sparkline"></div>
@@ -77,7 +78,7 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <input id="scriptCheck" type="checkbox"
+                                        <input id="scriptCheck" checked type="checkbox"
                                             aria-label="Checkbox for following text input">
                                     </div>
                                 </div>
