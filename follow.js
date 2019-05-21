@@ -23,31 +23,65 @@ function xmlhttpPost(strURL) {
   self.xmlHttpReq.send();
 }
 
-
 // curl 'https://app.tradefollow.com.br/resp.asp' -X POST -H 'Origin: https://app.tradefollow.com.br' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: */*' -H 'Referer: https://app.tradefollow.com.br/painel-cliente.asp' -H 'Cookie: _gcl_aw=GCL.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; ASPSESSIONIDCUQRBAAD=MADOFLHAJHLGNAJKICLOGEEI; ASPSESSIONIDAURQAABD=AOMHLFJBDJHKLPKOAEKJHGCM; ASPSESSIONIDAWQTCDCB=AAPKMNCDNIBKJAOFKMCMBPON; ASPSESSIONIDCUQTADCB=BHHBAEMAPMOGGEKKNPINKCAC; ASPSESSIONIDAWTTCDDA=LKFMEBJBKDIAANBAANNMNDGC' -H 'Connection: keep-alive' -H 'Content-Length: 0' --compressed
 
+const arq =
+  "<!POmabewdo=&check;mabewdoPO><!POmabewin=&otimes;mabewinPO><!P.mabewin=0mabewinP.><!ACmabewin=0mabewinAC><!AVmabewin=3mabewinAV><!P.mabewdo=0mabewdoP.><!ACmabewdo=0mabewdoAC><!AVmabewdo=0mabewdoAV><!F.mabewin=66mabewinF.><!F.mabewdo=55mabewdoF.><!F.mabedia=121mabediaF.><!F.mabemes=-268mabemesF.><!POwollwdo=&check;wollwdoPO><!POwollwin=&check;wollwinPO><!P.wollwin=0wollwinP.><!ACwollwin=0wollwinAC><!AVwollwin=0wollwinAV><!P.wollwdo=0wollwdoP.><!ACwollwdo=0wollwdoAC><!AVwollwdo=0wollwdoAV><!F.wollwin=23wollwinF.><!F.wollwdo=-10wollwdoF.><!F.wolldia=13wolldiaF.><!F.wollmes=-632wollmesF.><!POdaniwdo=&check;daniwdoPO><!POdaniwin=&check;daniwinPO><!P.daniwin=0daniwinP.><!ACdaniwin=0daniwinAC><!AVdaniwin=0daniwinAV><!P.daniwdo=0daniwdoP.><!ACdaniwdo=0daniwdoAC><!AVdaniwdo=0daniwdoAV><!F.daniwin=140daniwinF.><!F.daniwdo=-60daniwdoF.><!F.danidia=80danidiaF.><!F.danimes=-2054danimesF.><!POcowbwin=&check;cowbwinPO><!P.cowbwin=0cowbwinP.><!ACcowbwin=0cowbwinAC><!AVcowbwin=0cowbwinAV><!F.cowbwin=158cowbwinF.><!F.cowbdia=158cowbdiaF.><!F.cowbmes=-394cowbmesF.><!POcarlwin=&check;carlwinPO><!P.carlwin=0carlwinP.><!ACcarlwin=0carlwinAC><!AVcarlwin=0carlwinAV><!F.carlwin=-140carlwinF.><!F.carldia=-140carldiaF.><!F.carlmes=-146carlmesF.><!POlucawdo=&check;lucawdoPO><!POlucawin=&otimes;lucawinPO><!POlucabov=&check;lucabovPO><!P.lucawin=-1lucawinP.><!AClucawin=0lucawinAC><!AVlucawin=0lucawinAV><!P.lucawdo=0lucawdoP.><!AClucawdo=0lucawdoAC><!AVlucawdo=0lucawdoAV><!P.lucabov=0lucabovP.><!AClucabov=0lucabovAC><!AVlucabov=0lucabovAV><!F.lucawin=5 (-1)lucawinF.><!F.lucawdo=0lucawdoF.><!F.lucadia=-3lucadiaF.><!F.lucames=-442lucamesF.><!POtjonwdo=&otimes;tjonwdoPO><!POtjonwin=&check;tjonwinPO><!P.tjonwin=0tjonwinP.><!ACtjonwin=0tjonwinAC><!AVtjonwin=0tjonwinAV><!P.tjonwdo=-2tjonwdoP.><!ACtjonwdo=3tjonwdoAC><!AVtjonwdo=3tjonwdoAV><!F.tjonwin=0tjonwinF.><!F.tjonwdo=-95 (-2)tjonwdoF.><!F.tjondia=-95tjondiaF.><!F.tjonmes=-804tjonmesF.><!POgutowin=&check;gutowinPO><!P.gutowin=0gutowinP.><!ACgutowin=0gutowinAC><!AVgutowin=0gutowinAV><!P.gutowdo=0gutowdoP.><!ACgutowdo=0gutowdoAC><!AVgutowdo=0gutowdoAV><!F.gutowin=0gutowinF.><!F.gutowdo=30gutowdoF.><!F.gutodia=30gutodiaF.><!F.gutomes=-81gutomesF.><!POjoaqwdo=&check;joaqwdoPO><!P.joaqwdo=0joaqwdoP.><!ACjoaqwdo=0joaqwdoAC><!AVjoaqwdo=0joaqwdoAV><!F.joaqwdo=-20joaqwdoF.><!F.joaqdia=-20joaqdiaF.><!F.joaqmes=-15joaqmesF.><!POtleowdo=&otimes;tleowdoPO><!P.tleowdo=tleowdoP.><!ACtleowdo=tleowdoAC><!AVtleowdo=tleowdoAV><!F.tleowdo=0tleowdoF.><!F.tleodia=0tleodiaF.><!F.tleomes=0tleomesF.>";
 
-const arq = "<!POmabewdo=&check;mabewdoPO><!POmabewin=&otimes;mabewinPO><!P.mabewin=0mabewinP.><!ACmabewin=0mabewinAC><!AVmabewin=3mabewinAV><!P.mabewdo=0mabewdoP.><!ACmabewdo=0mabewdoAC><!AVmabewdo=0mabewdoAV><!F.mabewin=66mabewinF.><!F.mabewdo=55mabewdoF.><!F.mabedia=121mabediaF.><!F.mabemes=-268mabemesF.><!POwollwdo=&check;wollwdoPO><!POwollwin=&check;wollwinPO><!P.wollwin=0wollwinP.><!ACwollwin=0wollwinAC><!AVwollwin=0wollwinAV><!P.wollwdo=0wollwdoP.><!ACwollwdo=0wollwdoAC><!AVwollwdo=0wollwdoAV><!F.wollwin=23wollwinF.><!F.wollwdo=-10wollwdoF.><!F.wolldia=13wolldiaF.><!F.wollmes=-632wollmesF.><!POdaniwdo=&check;daniwdoPO><!POdaniwin=&check;daniwinPO><!P.daniwin=0daniwinP.><!ACdaniwin=0daniwinAC><!AVdaniwin=0daniwinAV><!P.daniwdo=0daniwdoP.><!ACdaniwdo=0daniwdoAC><!AVdaniwdo=0daniwdoAV><!F.daniwin=140daniwinF.><!F.daniwdo=-60daniwdoF.><!F.danidia=80danidiaF.><!F.danimes=-2054danimesF.><!POcowbwin=&check;cowbwinPO><!P.cowbwin=0cowbwinP.><!ACcowbwin=0cowbwinAC><!AVcowbwin=0cowbwinAV><!F.cowbwin=158cowbwinF.><!F.cowbdia=158cowbdiaF.><!F.cowbmes=-394cowbmesF.><!POcarlwin=&check;carlwinPO><!P.carlwin=0carlwinP.><!ACcarlwin=0carlwinAC><!AVcarlwin=0carlwinAV><!F.carlwin=-140carlwinF.><!F.carldia=-140carldiaF.><!F.carlmes=-146carlmesF.><!POlucawdo=&check;lucawdoPO><!POlucawin=&otimes;lucawinPO><!POlucabov=&check;lucabovPO><!P.lucawin=-1lucawinP.><!AClucawin=0lucawinAC><!AVlucawin=0lucawinAV><!P.lucawdo=0lucawdoP.><!AClucawdo=0lucawdoAC><!AVlucawdo=0lucawdoAV><!P.lucabov=0lucabovP.><!AClucabov=0lucabovAC><!AVlucabov=0lucabovAV><!F.lucawin=5 (-1)lucawinF.><!F.lucawdo=0lucawdoF.><!F.lucadia=-3lucadiaF.><!F.lucames=-442lucamesF.><!POtjonwdo=&otimes;tjonwdoPO><!POtjonwin=&check;tjonwinPO><!P.tjonwin=0tjonwinP.><!ACtjonwin=0tjonwinAC><!AVtjonwin=0tjonwinAV><!P.tjonwdo=-2tjonwdoP.><!ACtjonwdo=3tjonwdoAC><!AVtjonwdo=3tjonwdoAV><!F.tjonwin=0tjonwinF.><!F.tjonwdo=-95 (-2)tjonwdoF.><!F.tjondia=-95tjondiaF.><!F.tjonmes=-804tjonmesF.><!POgutowin=&check;gutowinPO><!P.gutowin=0gutowinP.><!ACgutowin=0gutowinAC><!AVgutowin=0gutowinAV><!P.gutowdo=0gutowdoP.><!ACgutowdo=0gutowdoAC><!AVgutowdo=0gutowdoAV><!F.gutowin=0gutowinF.><!F.gutowdo=30gutowdoF.><!F.gutodia=30gutodiaF.><!F.gutomes=-81gutomesF.><!POjoaqwdo=&check;joaqwdoPO><!P.joaqwdo=0joaqwdoP.><!ACjoaqwdo=0joaqwdoAC><!AVjoaqwdo=0joaqwdoAV><!F.joaqwdo=-20joaqwdoF.><!F.joaqdia=-20joaqdiaF.><!F.joaqmes=-15joaqmesF.><!POtleowdo=&otimes;tleowdoPO><!P.tleowdo=tleowdoP.><!ACtleowdo=tleowdoAC><!AVtleowdo=tleowdoAV><!F.tleowdo=0tleowdoF.><!F.tleodia=0tleodiaF.><!F.tleomes=0tleomesF.>"
-let trds = [
-                { name: "cowb", atvs: ["win"], history: [{ date: '', time: '',  d: '', m: '',p: '',f: '',ac: '', av: '' }] }, 
-                { name: "carl", atvs: ["win"] },
-                { name: "mabe", atvs: ["wdo","win"] },
-                { name: "woll", atvs: ["wdo","win"] },
-                { name: "guto", atvs: ["wdo","win"] },
-                { name: "tjon", atvs: ["wdo","win"] },
-                { name: "joaq", atvs: ["wdo"] },
-                { name: "tleo", atvs: ["wdo"] },
-                { name: "dani", atvs: ["wdo","win"] },
-                { name: "luca", atvs: ["wdo","win","bov"] },
-            ];
+/*
 
-const updatepage2 = (str) => {
+<!POmabewdo=&check;mabewdoPO>
+<!POmabewin=&otimes;mabewinPO>
 
+<!P.mabewin=0mabewinP.>
+<!ACmabewin=0mabewinAC>
+<!AVmabewin=3mabewinAV>
 
+<!P.mabewdo=0mabewdoP.>
+<!ACmabewdo=0mabewdoAC>
+<!AVmabewdo=0mabewdoAV>
 
+<!F.mabewin=66mabewinF.>
+<!F.mabewdo=55mabewdoF.>
+
+<!F.mabedia=121mabediaF.>
+<!F.mabemes=-268mabemesF.>
+
+<!POwollwdo=&check;wollwdoPO>
+<!POwollwin=&check;wollwinPO>
+<!P.wollwin=0wollwinP.><!ACwollwin=0wollwinAC><!AVwollwin=0wollwinAV><!P.wollwdo=0wollwdoP.><!ACwollwdo=0wollwdoAC><!AVwollwdo=0wollwdoAV><!F.wollwin=23wollwinF.><!F.wollwdo=-10wollwdoF.><!F.wolldia=13wolldiaF.><!F.wollmes=-632wollmesF.><!POdaniwdo=&check;daniwdoPO><!POdaniwin=&check;daniwinPO><!P.daniwin=0daniwinP.><!ACdaniwin=0daniwinAC><!AVdaniwin=0daniwinAV><!P.daniwdo=0daniwdoP.><!ACdaniwdo=0daniwdoAC><!AVdaniwdo=0daniwdoAV><!F.daniwin=140daniwinF.><!F.daniwdo=-60daniwdoF.><!F.danidia=80danidiaF.><!F.danimes=-2054danimesF.><!POcowbwin=&check;cowbwinPO><!P.cowbwin=0cowbwinP.><!ACcowbwin=0cowbwinAC><!AVcowbwin=0cowbwinAV><!F.cowbwin=158cowbwinF.><!F.cowbdia=158cowbdiaF.><!F.cowbmes=-394cowbmesF.><!POcarlwin=&check;carlwinPO><!P.carlwin=0carlwinP.><!ACcarlwin=0carlwinAC><!AVcarlwin=0carlwinAV><!F.carlwin=-140carlwinF.><!F.carldia=-140carldiaF.><!F.carlmes=-146carlmesF.><!POlucawdo=&check;lucawdoPO><!POlucawin=&otimes;lucawinPO><!POlucabov=&check;lucabovPO><!P.lucawin=-1lucawinP.><!AClucawin=0lucawinAC><!AVlucawin=0lucawinAV><!P.lucawdo=0lucawdoP.><!AClucawdo=0lucawdoAC><!AVlucawdo=0lucawdoAV><!P.lucabov=0lucabovP.><!AClucabov=0lucabovAC><!AVlucabov=0lucabovAV><!F.lucawin=5 (-1)lucawinF.><!F.lucawdo=0lucawdoF.><!F.lucadia=-3lucadiaF.><!F.lucames=-442lucamesF.><!POtjonwdo=&otimes;tjonwdoPO><!POtjonwin=&check;tjonwinPO><!P.tjonwin=0tjonwinP.><!ACtjonwin=0tjonwinAC><!AVtjonwin=0tjonwinAV><!P.tjonwdo=-2tjonwdoP.><!ACtjonwdo=3tjonwdoAC><!AVtjonwdo=3tjonwdoAV><!F.tjonwin=0tjonwinF.><!F.tjonwdo=-95 (-2)tjonwdoF.><!F.tjondia=-95tjondiaF.><!F.tjonmes=-804tjonmesF.><!POgutowin=&check;gutowinPO><!P.gutowin=0gutowinP.><!ACgutowin=0gutowinAC><!AVgutowin=0gutowinAV><!P.gutowdo=0gutowdoP.><!ACgutowdo=0gutowdoAC><!AVgutowdo=0gutowdoAV><!F.gutowin=0gutowinF.><!F.gutowdo=30gutowdoF.><!F.gutodia=30gutodiaF.><!F.gutomes=-81gutomesF.><!POjoaqwdo=&check;joaqwdoPO><!P.joaqwdo=0joaqwdoP.><!ACjoaqwdo=0joaqwdoAC><!AVjoaqwdo=0joaqwdoAV><!F.joaqwdo=-20joaqwdoF.><!F.joaqdia=-20joaqdiaF.><!F.joaqmes=-15joaqmesF.><!POtleowdo=&otimes;tleowdoPO><!P.tleowdo=tleowdoP.><!ACtleowdo=tleowdoAC><!AVtleowdo=tleowdoAV><!F.tleowdo=0tleowdoF.><!F.tleodia=0tleodiaF.><!F.tleomes=0tleomesF.>";
+
+*/
+
+let h_atvs = {
+    atv: '',    // nome do ativo
+    f: '',      // resultado do ativo
+    ac: '',     // ordem de compra
+    av: '',     // ordem de venda
+    p: ''       //  
 }
 
+let history = {
+  history: {
+    items: [{ date: "", time: "", dia: "", mes: "", atvs: [] }]
+  }
+};
 
+let trds = [
+  { name: "cowb", atvs: ["win"] },
+  { name: "carl", atvs: ["win"] },
+  { name: "mabe", atvs: ["wdo", "win"] },
+  { name: "woll", atvs: ["wdo", "win"] },
+  { name: "guto", atvs: ["wdo", "win"] },
+  { name: "tjon", atvs: ["wdo", "win"] },
+  { name: "joaq", atvs: ["wdo"] },
+  { name: "tleo", atvs: ["wdo"] },
+  { name: "dani", atvs: ["wdo", "win"] },
+  { name: "luca", atvs: ["wdo", "win", "bov"] }
+];
+
+
+const updatepage2 = str => {};
 
 function updatepage(str) {
   var sj = new Date().getTime() / 1000;
