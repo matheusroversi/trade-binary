@@ -1,6 +1,8 @@
 const util = require("util");
 const qs = require("qs");
 const axios = require("axios");
+let login = false;
+let Cookie = "";
 
 String.prototype.replaceAll =
   String.prototype.replaceAll ||
@@ -51,13 +53,13 @@ const existTradeInObj = (trade, obj) => {
   return false;
 };
 
-const updatePage_2 = data => {
+const updateData = data => {
   D = new Date();
   d = D.getDate() + "-" + (D.getMonth() + 1) + "-" + D.getFullYear();
   t = D.getHours() + ":" + D.getMinutes() + ":" + D.getSeconds();
 
   let arr = returnArray(data);
-  console.log("arr", arr);
+
   arr.map(item => {
     // Create trade
     if (objHistory[item.trade] === undefined) {
@@ -85,13 +87,12 @@ const updatePage_2 = data => {
   // localStorage.setItem(DB, JSON.stringify(objHistory))
 };
 
-
 const X_POST = async url => {
+  console.warn(">> X-POST Iniciado");
   const config = {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Cookie:
-        "_ga=GA1.3.1064978812.1557147076; _fbp=fb.2.1557147076380.731540517; _gac_UA-118137306-1=1.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; _gcl_aw=GCL.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; ASPSESSIONIDCUQRBAAD=MADOFLHAJHLGNAJKICLOGEEI; ASPSESSIONIDAURQAABD=AOMHLFJBDJHKLPKOAEKJHGCM; ASPSESSIONIDAWQTCDCB=AAPKMNCDNIBKJAOFKMCMBPON; ASPSESSIONIDCUQTADCB=BHHBAEMAPMOGGEKKNPINKCAC; ASPSESSIONIDAWTTCDDA=FBLBJCJBDNCDLBKAPGHEKGOD; ASPSESSIONIDCURTDDCA=HCIGEKFCIDDNLAHCBBLLCPKF",
+      Cookie: Cookie,
       Host: "app.tradefollow.com.br"
     }
   };
@@ -102,12 +103,13 @@ const X_POST = async url => {
   } catch (e) {
     console.log("Error: ", e);
   }
-  let t = updatePage_2(result.data);
+
+  let t = updateData(result.data);
   console.log(util.inspect(t, false, null, true /* enable colors */));
 };
 
-let Cookie = "";
 const Login = async () => {
+  console.warn(">> Login iniciado");
   const config = {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -118,8 +120,7 @@ const Login = async () => {
         "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
       "User-Agent":
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36",
-      Cookie:
-        "_ga=GA1.3.1064978812.1557147076; _fbp=fb.2.1557147076380.731540517; _gac_UA-118137306-1=1.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; _gcl_aw=GCL.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; ASPSESSIONIDCUQRBAAD=MADOFLHAJHLGNAJKICLOGEEI; ASPSESSIONIDAURQAABD=AOMHLFJBDJHKLPKOAEKJHGCM; ASPSESSIONIDAWQTCDCB=AAPKMNCDNIBKJAOFKMCMBPON; ASPSESSIONIDCUQTADCB=BHHBAEMAPMOGGEKKNPINKCAC; ASPSESSIONIDAWTTCDDA=FBLBJCJBDNCDLBKAPGHEKGOD; ASPSESSIONIDCURTDDCA=FBLDILFCOGKAEMKGAMJIKNGA"
+      Cookie: "_ga=GA1.3.1064978812.1557147076; _fbp=fb.2.1557147076380.731540517; _gac_UA-118137306-1=1.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; _gcl_aw=GCL.1557150725.EAIaIQobChMIvufRvIaH4gIVFAiRCh1MXwi3EAAYASAAEgLtevD_BwE; ASPSESSIONIDCUQRBAAD=MADOFLHAJHLGNAJKICLOGEEI; ASPSESSIONIDAURQAABD=AOMHLFJBDJHKLPKOAEKJHGCM; ASPSESSIONIDAWQTCDCB=AAPKMNCDNIBKJAOFKMCMBPON; ASPSESSIONIDCUQTADCB=BHHBAEMAPMOGGEKKNPINKCAC; ASPSESSIONIDAWTTCDDA=FBLBJCJBDNCDLBKAPGHEKGOD; ASPSESSIONIDCURTDDCA=GPKKLMFCFLJLHKOPEHMPMPJG"
     }
   };
 
@@ -127,16 +128,26 @@ const Login = async () => {
   try {
     result = await axios.post(
       "https://app.tradefollow.com.br/?A=Painel&Login=1",
-
       qs.stringify({ user: "32660500886", senha: "roversi00" }),
       config
     );
   } catch (e) {
-    console.log("Error: ", e);
+    console.error("Error: ", e);
   }
+
   let t = result;
-  Cookie = result.headers.Cookie;
-  console.log(result.config.headers.Cookie);
+  Cookie = result.config.headers.Cookie;
+  
+
+  let path = result.request.connection._httpMessage.path;
+  if (path === "/painel-cliente.asp") {
+    login = true;
+    console.warn(">> Logggin successfull");
+    ajaxRequest();
+  } else {
+	console.error(">> Ocorreu um erro ao tentar efetuar loggin")
+	console.log(result)
+  }
 };
 
 const ajaxRequest = () => {
@@ -147,4 +158,14 @@ const getData = () => {
   var t = setInterval(ajaxRequest(), 10000);
 };
 
-Login();
+const Init = () => {
+  if (Cookie === "") {
+    console.warn(">> Efetuando login");
+    Login();
+  } else {
+    console.warn(">> Executando ajax");
+    ajaxRequest();
+  }
+};
+
+Init();
